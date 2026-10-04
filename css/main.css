@@ -1,0 +1,272 @@
+/* Propedeuse updates — layout, type, timeline */
+
+:root {
+  --bg: #f3efe6;
+  --bg-2: #e7e1d4;
+  --ink: #1c1914;
+  --ink-soft: #5c564c;
+  --paper: #fffaf2;
+  --line: #d4cdc0;
+  --accent: #b5441a;
+  --accent-deep: #8c3010;
+  --today: #2f5d45;
+  --shadow: 0 18px 40px rgba(28, 25, 20, 0.08);
+  --radius: 18px;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+  --max: 42rem;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --sans: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "SFMono-Regular", "Menlo", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(181, 68, 26, 0.08), transparent 28%),
+    radial-gradient(circle at 90% 0%, rgba(47, 93, 69, 0.1), transparent 32%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: radial-gradient(rgba(28, 25, 20, 0.12) 0.6px, transparent 0.7px);
+  background-size: 7px 7px;
+  z-index: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 3;
+  padding: 0.5rem 0.8rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+.top,
+#dagen,
+.foot {
+  position: relative;
+  z-index: 1;
+  width: min(var(--max), calc(100% - var(--pad) * 2));
+  margin-inline: auto;
+}
+
+.top {
+  padding: calc(var(--pad) * 1.4) 0 var(--pad);
+}
+
+.kicker {
+  margin: 0 0 0.6rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 0.7rem;
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 28rem;
+  color: var(--ink-soft);
+}
+
+#dagen {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: calc(var(--pad) * 1.5);
+  border-left: 2px solid var(--line);
+  padding-left: 1.4rem;
+}
+
+.day {
+  position: relative;
+  padding: 1.2rem 1.3rem 1.15rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 160ms ease;
+}
+
+.day::before {
+  content: "";
+  position: absolute;
+  top: 1.45rem;
+  left: calc(-1.4rem - 6px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+.day.is-today {
+  border-color: color-mix(in srgb, var(--today) 40%, var(--line));
+}
+
+.day.is-today::before {
+  background: var(--today);
+  border-color: var(--today);
+}
+
+.day > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.day time {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.tag {
+  margin: 0;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--today);
+  color: #f4fff8;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.day ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.day li {
+  position: relative;
+  padding: 0.35rem 0 0.35rem 1.15rem;
+  border-top: 1px dashed var(--line);
+}
+
+.day li:first-child {
+  border-top: 0;
+}
+
+.day li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.day:hover {
+  transform: translateY(-2px);
+}
+
+.foot {
+  padding: 0 0 calc(var(--pad) * 1.4);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.foot p {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+a {
+  color: var(--accent-deep);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  #dagen {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .day::before {
+    display: none;
+  }
+
+  .day time {
+    font-size: 1.08rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .day:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  body,
+  body::before {
+    background: white;
+  }
+
+  .skip,
+  .day::before {
+    display: none;
+  }
+
+  .day {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}
